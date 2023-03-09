@@ -128,10 +128,6 @@ void Graph::updateFlow (){
         << path[1] << "." << endl;
         flow++;
     } 
-    cout << flow << ", " << maxFlow << endl;
-    if(flow < maxFlow){
-
-    }
 }
 
 void Graph::printAdj(){
