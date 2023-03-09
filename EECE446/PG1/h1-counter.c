@@ -18,7 +18,7 @@
  */
 int lookup_and_connect( const char *host, const char *service );
 
-int main( ) {
+int main( char argc, char **argv[]) {
 	int s;
 	const char *host = "www.ecst.csuchico.edu";
 	const char *port = "80";
@@ -41,7 +41,7 @@ int main( ) {
 	//int size;
 	//scanf("%d", size);
 	
-	int size = 1000;
+	int size = (int)argv[1];
 
 	memcpy(buf, str, sizeof(str));
 
@@ -52,10 +52,8 @@ int main( ) {
 		exit(1);
 	}
 	int temp = 0;
-	while(temp <= size){
-		temp += recv(s, buf, size, 0);
-		fputs(buf, ptr);
-	}
+	recv(s,buf,size,0);
+	fputs(buf, ptr);
 	
 
 
