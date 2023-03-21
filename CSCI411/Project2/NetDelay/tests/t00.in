@@ -1,0 +1,8 @@
+6
+addEdge 0 1 4
+addEdge 0 2 5
+addEdge 2 3 7
+addEdge 2 4 4
+addEdge 4 5 4
+printGraphW
+findNetDelay

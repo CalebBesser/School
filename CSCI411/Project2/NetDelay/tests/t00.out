@@ -1,0 +1,11 @@
+Graph is:
+0: 1/4	2/5	
+1: 0/4	
+2: 0/5	3/7	4/4	
+3: 2/7	
+4: 2/4	5/4	
+5: 4/4	
+
+The longest path is:
+1 0 2 4 5 
+The length of the longest path is 17.
