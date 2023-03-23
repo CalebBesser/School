@@ -68,7 +68,9 @@ int main( int argc , char *argv[]) {
 			packet[49] = '\0';
 			memcpy(packet, &action, sizeof(action));
 			memcpy(packet + sizeof(action), &id, sizeof(id));
-			printf("%li", strlen(action));
+			int len = sizeof(action) + sizeof(id);
+			printf("%u\n", id);
+			sendall(s, packet, &len);
 			
 		}else if(strcmp(option, "PUBLISH")){
 		}
