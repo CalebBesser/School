@@ -60,7 +60,7 @@ int main( int argc , char *argv[]) {
 		if(strcmp(option, "EXIT") == 0){
 			break;
 		}else if(strcmp(option, "JOIN") == 0){
-			char action = '0';
+			char *action = "0";
 			unsigned int id;
 			sscanf(ID, "%i", &id);
 			id = htonl(id);
@@ -68,8 +68,9 @@ int main( int argc , char *argv[]) {
 			packet[49] = '\0';
 			memcpy(packet, &action, sizeof(action));
 			memcpy(packet + sizeof(action), &id, sizeof(id));
-			printf("%li", strlen(action));
-			
+			//printf("%s", &packet[0]);
+			int len = sizeof(action) + sizeof(id);
+			sendall(s, packet, &len);
 		}else if(strcmp(option, "PUBLISH")){
 		}
 	}
