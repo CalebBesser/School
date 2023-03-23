@@ -157,6 +157,39 @@ void Graph::printTopOrder(){
 }//printTopOrder
 
 
+void Graph::findShortPaths(int source){
+	topSort();
+	vector<int> D((int)topOrder.size(), INT_MAX);
+	vector<int> P((int)topOrder.size(), 0);
+	D[source] = 0;
+	P[source] = source;
+	for(int i = 0; i < (int)topOrder.size(); i++){
+		int currentNode = topOrder[i];
+		for(int j = 0; j < (int)Adj[currentNode].size(); j++){
+			edge neighbor = Adj[currentNode][j];
+			if(neighbor.w + D[currentNode] < D[neighbor.neighbor]){
+				D[neighbor.neighbor] = neighbor.w + D[currentNode];
+				P[neighbor.neighbor] = topOrder[i];
+			}
+		}
+	}
+	cout << "D: ";
+	for(int i = 0; i < (int)D.size(); i++){
+		cout << D[i] << " ";
+	}
+	cout << endl;
+	cout << "P: ";
+	for(int i = 0; i < (int)P.size(); i++){
+		cout << P[i] << " ";
+	}
+	cout << endl;
+	for(int i = 0; i < (int)D.size(); i++){
+		if(D[i] != INT_MAX){
+			cout << i << " " << D[i];
+		}
+	}
+}
+
 /************* End of Directed Graph **************/
 
 
