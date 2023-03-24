@@ -157,6 +157,15 @@ void Graph::printTopOrder(){
 }//printTopOrder
 
 
+void Graph::findShortPaths(int source){
+	topSort();
+	printTopOrder();
+	for(int i = 0; i < (int)parents.size(); i++){
+		cout << parents[i] << " ";
+	}
+	cout << endl;
+}
+
 /************* End of Directed Graph **************/
 
 
