@@ -1,15 +1,39 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include <algorithm>
 using namespace std;
 
 //This function fills in table P 
 void is_pal(vector< vector<bool> > &P, const string &s);
 
+void printSubStrings(const string &s, vector<int> &B, int start, vector<string> &substrings){
+    int to = B[start];
+    if(B[start] == -1){
+        if(start == 0){
+            char temp = s[0];
+            string sub;
+            sub += temp;
+            substrings.push_back(sub);
+            return;
+        }else{
+            string sub = s.substr(0, start-B[start]);
+            substrings.push_back(sub);
+            return;
+        }
+        
+    }else{
+        string sub = s.substr(to + 1, start-B[start]);
+        substrings.push_back(sub);
+        return printSubStrings(s, B, to, substrings);
+        
+    }
+}
+
 int main(){
         string myString;
         cin >> myString;
-        cout << myString << "\n";
+        vector<string> substrings;
         int len = myString.size();
         vector<vector<bool>> P(len, vector<bool>(len, 0));
         vector<int> C(len, 0);
@@ -32,28 +56,41 @@ int main(){
             }
            
         }
-        /*
-        loop through each element i
-        for each i loop from j to i, j from 0
-        update C and B for each element based on rules on pdf
-        */
+
+        printSubStrings(myString, B, len-1, substrings);
+
+        reverse(substrings.begin(), substrings.end());
+
+        for(int i = 0; i < (int)substrings.size(); i++){
+            cout << substrings[i] << "\n";
+        }
         cout << "C: ";
         for(int i = 0; i < len; i++){
             cout << C[i] << " ";
         }
         cout << "\n";
-        cout << "B: ";
+        if(B[0] == -1){
+            cout << "B:";
+        }else{
+            cout << "B: ";
+        }
+        
         for(int i = 0; i < len; i++){
-            cout << B[i] << " ";
+            if(B[i+1] == -1){
+                cout << B[i];
+            }else{
+                cout << B[i] << " ";
+            }
+            
         }
         cout << "\n";
-        cout << "   ";
-        for(int j = 0; j < len; j++){
-            cout << myString[j] << " ";
+        cout << "  ";
+        for(int i = 0; i < len; i++){
+            cout << myString[i] << " ";
         }
         cout << "\n";
         for(int i = 0; i < len; i++){
-            cout << myString[i] << ": ";
+            cout << myString[i] << " ";
             for(int j = 0; j < len; j++){
                 cout << P[i][j] << " ";
             }
