@@ -1,0 +1,26 @@
+24
+addEdge 0 3 11
+addEdge 1 2 13
+addEdge 2 3 8
+addEdge 2 4 19
+addEdge 4 6 12
+addEdge 5 6 16
+addEdge 5 11 24
+addEdge 6 9 14
+addEdge 7 8 28
+addEdge 7 9 20
+addEdge 7 10 29
+addEdge 7 20 30
+addEdge 7 21 35
+addEdge 7 22 17
+addEdge 11 13 12
+addEdge 11 14 5
+addEdge 11 23 10
+addEdge 12 13 18
+addEdge 14 15 7
+addEdge 16 23 21
+addEdge 17 23 22
+addEdge 18 23 24
+addEdge 19 23 15
+printGraphW
+findNetDelay
