@@ -12,6 +12,7 @@
 #include <ctype.h>
 #include <netinet/in.h>
 #include <inttypes.h>
+#include <dirent.h>
 
 
 /*
@@ -57,28 +58,47 @@ int main( int argc , char *argv[]) {
 		for(int i = 0; i < sizeof(option) - 1; i++) {
 			option[i] = toupper(option[i]);
 		}
+		
 		if(strcmp(option, "EXIT") == 0){
 			break;
 		}else if(strcmp(option, "JOIN") == 0){
-			char *action = "0";
+			char action[2];
+			action[0] = '0';
 			unsigned int id;
 			sscanf(ID, "%i", &id);
 			id = htonl(id);
 			char packet[50];
-			packet[49] = '\0';
-			memcpy(packet, &action, sizeof(action));
+			memcpy(packet, &action, strlen(action) + 1);
 			memcpy(packet + sizeof(action), &id, sizeof(id));
-<<<<<<< HEAD
 			int len = sizeof(action) + sizeof(id);
-			printf("%u\n", id);
-			sendall(s, packet, &len);
+			int worked;
+			if((worked = sendall(s, packet, &len)) == -1){
+				printf("Error Sending");
+			}
 			
-=======
-			//printf("%s", &packet[0]);
-			int len = sizeof(action) + sizeof(id);
-			sendall(s, packet, &len);
->>>>>>> e72512776c14054e9064cca82380fc943adbfe31
-		}else if(strcmp(option, "PUBLISH")){
+		}else if(strcmp(option, "PUBLISH") == 0){
+			struct dirent *de;
+			char packet[50];
+			DIR *dr = opendir("./SharedFiles");
+			
+					if (dr == NULL)
+			{
+				printf("Could not open current directory" );
+				return 0;
+			}
+			int temp;
+			while ((de = readdir(dr)) != NULL){
+				if(strcmp(de->d_name, ".") != 0 && strcmp(de->d_name, "..") != 0){
+					memcpy(packet + temp, de->d_name, strlen(de->d_name)+1);
+					temp += strlen(de->d_name)+1;
+					printf("%s\n", de->d_name);
+				}
+				
+			}
+			printf("%s",packet);
+					
+		
+			closedir(dr);  
 		}
 	}
 	
